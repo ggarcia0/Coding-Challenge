@@ -20,7 +20,13 @@ describe("TS : Usuario agrega un item al SP",()=>{
         cy.url().should("include","idp")
         cy.get(".btn-success").click()
         cy.on('window:alert',(t)=>{
-            expect(t).to.contains('Product added.');
+            expect(t).to.contains('Product added.')
+        
+        //Se comprueba que el SP tenga al menos un item
+        cy.contains("Cart").click()
+        cy.wait(1000)
+        cy.contains("Products").should('be.visible')
+        cy.get(".sucess").should('exist');
          })
     })
 })
